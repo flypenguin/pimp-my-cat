@@ -1147,7 +1147,7 @@ function scroll_current() {
 // ==========================================================================
 
 function logDate(logmessage) {
-    console.log(new Date().toLocaleFormat('%Y-%m-%d %H:%M.%S') + ": " + logmessage);
+    console.log(new Date().toISOString() + ": PIMPed: " + logmessage);
 }
 
 in_pimpKeyboardShortcuts = 0;
