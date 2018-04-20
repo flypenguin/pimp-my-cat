@@ -5,10 +5,9 @@
 // @include       http://training.cat-europe.com/TrainingModeFrame.aspx
 // @include       https://training.cat-europe.com/TrainingModeFrame.aspx
 // @version       10.7
-// @screenshot    http://k.min.us/ilyyO4.png
-// @id            pimpmycat@ptntools
+// @namespace     https://flypenguin.de/pimp-my-cat
 // @author        Axel Bock <mr.axel.bock@gmail.com>
-// @require       http://code.jquery.com/jquery-1.6.min.js
+// @require       https://code.jquery.com/jquery-1.12.4.min.js
 // @require       https://greasyfork.org/scripts/13081-pimp-my-cat-hotkeys-script/code/Pimp%20My%20CAT%20hotkeys%20script.user.js
 // ==/UserScript==
 
