@@ -21,22 +21,22 @@ pmc_version = "10.7";
 
 function getNotAnswered() {
     return $('tr:not(.hide-row) > td:nth-child(2) > img[src="images/spacer.gif"]',
-        window.frames[1].document).size();
+        window.frames[1].document).length;
 }
 
 function getCorrectAnswered() {
     return $('tr:not(.hide-row) > td:nth-child(2) > img[src="images/frage_richtig.gif"]',
-        window.frames[1].document).size();
+        window.frames[1].document).length;
 }
 
 function getWronglyAnswered() {
     return $('tr:not(.hide-row) > td:nth-child(2) > img[src="images/frage_falsch.gif"]',
-        window.frames[1].document).size();
+        window.frames[1].document).length;
 }
 
 function getPinned() {
     return $('tr:not(.hide-row) > td:nth-child(3) > img[src="images/pin.gif"]',
-        window.frames[1].document).size();
+        window.frames[1].document).length;
 }
 
 function updateStatBox() {
@@ -142,7 +142,7 @@ function updateStatBox() {
     replace("%PINNED", pinned).
     replace("%MORE%", more);
     var box = $('#pimpmyCAT', window.frames[0].document);
-    if (!box.size()) {
+    if (!box.length) {
         box = $('<div id="pimpmyCAT"></div>');
         $('body > :last-child', window.frames[0].document).after(box);
     }
@@ -250,9 +250,9 @@ function initNeighbors() {
 
 function get_matrix_for(element) {
     var v0 = 1;
-    var v1 = element.find('img[src="images/pin.gif"]').size();
-    var v2 = element.find('img[src="images/frage_richtig.gif"]').size();
-    var v3 = element.find('img[src="images/frage_falsch.gif"]').size();
+    var v1 = element.find('img[src="images/pin.gif"]').length;
+    var v2 = element.find('img[src="images/frage_richtig.gif"]').length;
+    var v3 = element.find('img[src="images/frage_falsch.gif"]').length;
     if (v2 + v3 > 0) {
         v0 = 0;
     }
@@ -452,7 +452,7 @@ function dfil_display_filter(f) {
     display += "</ul>"
     // now display that :)
     var box = $('body > div#infobox', wf2d);
-    if (box.size()) box.html(display);
+    if (box.length) box.html(display);
     else {
         $('body', wf2d).
         prepend("<div id='infobox' class='infobox'>" + display + "</div>");
@@ -520,7 +520,7 @@ function dfil_reapply() {
 
 function screen_abort() {
     var wf2d = window.frames[2].document;
-    if ($('.pmc_screen', wf2d).size()) {
+    if ($('.pmc_screen', wf2d).length) {
         $('.pmc_screen', wf2d).remove();
         $('body', wf2d).children().each(function () {
             $(this).removeClass('hide-row');
@@ -538,11 +538,11 @@ function screen_prepare() {
 
 function screen_check_already_there(idstr) {
     // if THIS screen is already there we will simply return "yes"
-    if ($('#' + idstr, window.frames[2].document).size()) {
+    if ($('#' + idstr, window.frames[2].document).length) {
         return true;
     }
     // otherwise if another screen is there we will kill it
-    if ($('.pmc_screen', window.frames[2].document).size()) {
+    if ($('.pmc_screen', window.frames[2].document).length) {
         screen_abort();
     }
     return false;
@@ -1054,7 +1054,7 @@ function goToWiki(edit) {
     if (edit) {
         url_mid = "page/edit/";
     }
-    if (target.size()) {
+    if (target.length) {
         var url_end = target.attr('url');
         if (url_end != "") {
             open('http://lbastudentwiki.wikispaces.com/' + url_mid + url_end);
@@ -1071,7 +1071,7 @@ function goToWiki(edit) {
 // test question: MET Q872
 function attTab(offset) {
     var att_cur = $('.a_col_active', window.frames[2].document);
-    if (att_cur.size()) {
+    if (att_cur.length) {
         var n_id = '#a_col' +
             (parseInt(att_cur.attr('id').substr(5, 6)) + offset).toFixed(0);
         att_cur.removeClass('a_col_active');
@@ -1122,8 +1122,8 @@ function advanceCursor(direction) {
     var q = $('.q-sel', window.frames[2].document);
     var a = $('.q-answer', window.frames[2].document);
     var t;
-    if (q.size() == 0) {
-        t = direction > 0 ? 0 : a.size() - 1;
+    if (q.length == 0) {
+        t = direction > 0 ? 0 : a.length - 1;
     } else {
         t = parseInt(q.eq(0).attr('qpos')) + direction;
     }
@@ -1377,12 +1377,12 @@ function pimpCheckboxes(answers) {
     // bubblesort
     var swapped = true;
     var order = [];
-    for (var i = 0; i < answers.size(); i++) {
+    for (var i = 0; i < answers.length; i++) {
         order.push(i);
     }
     while (swapped) {
         swapped = false;
-        for (i = 0; i < answers.size() - 1; i++) {
+        for (i = 0; i < answers.length - 1; i++) {
             t0 = parseInt(answers.eq(order[i]).css('top'));
             t1 = parseInt(answers.eq(order[i + 1]).css('top'));
             if (t0 > t1) {
@@ -1460,14 +1460,14 @@ function pimpAnswers() {
     $('#calculator', wf2d).find('input').remove();
     // now start.
     var answers = $('form input:checkbox', wf2d).closest('div');
-    if (answers.size() == 4) {
+    if (answers.length == 4) {
         logDate('pimpAnswers() - pimping checkboxes');
         // just assume the answer number is 4 and perform a little bubblesort.
         pimpCheckboxes(answers);
         $('html', wf2d).addClass('fully-question-pimped');
     } else {
         answers = $('form div input:text', wf2d);
-        if (answers.size()) {
+        if (answers.length) {
             logDate('pimpAnswers() - pimping input boxes');
             pimpInputBoxes(answers);
             $('html', wf2d).addClass('fully-question-pimped');
